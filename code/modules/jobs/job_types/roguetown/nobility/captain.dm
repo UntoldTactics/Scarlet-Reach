@@ -14,7 +14,6 @@
 	Veteran among knights, you lead the crown's knights to battle and organize the training squires. Obey the Marshal and the Crown. \
 	Lead your men to victory--and keep them in line--and you will see this realm prosper under a thousand suns."
 	display_order = JDO_GUARD_CAPTAIN
-	advclass_cat_rolls = list(CTAG_CAPTAIN = 20)
 	spells = list(/obj/effect/proc_holder/spell/self/convertrole/guard)
 	outfit = /datum/outfit/job/roguetown/captain
 	give_bank_account = 26
@@ -38,7 +37,7 @@
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/keyring/sheriff = 1,
-		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
+		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,)
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
 /datum/job/roguetown/captain/pre_equip(mob/living/carbon/human/H)
