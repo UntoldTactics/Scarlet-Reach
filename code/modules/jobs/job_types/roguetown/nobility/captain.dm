@@ -23,6 +23,9 @@
 	round_contrib_points = 3
 	cmode_music = 'sound/music/combat_knight.ogg'
 
+/datum/outfit/job/roguetown/captain
+	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
+
 /datum/outfit/job/roguetown/captain/pre_equip/(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/clothing/neck/roguetown/bevor
@@ -38,8 +41,8 @@
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/keyring/sheriff = 1,
-		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,)
-	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
+		/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1,
+	)
 	H.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/polearms, 5, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
