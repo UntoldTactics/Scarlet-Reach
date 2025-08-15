@@ -90,7 +90,7 @@
 		"Mace & Crossbow",
 		"Spear & Shield",
 		"Sabre & Shield",
-		"Lance + Kite Shield"
+		"Lance + Kite Shield",
 		)
 	var/weapon_choice = input("Choose your weapon.", "TAKE UP ARMS") as anything in weapons
 	switch(weapon_choice)
