@@ -495,7 +495,7 @@
 	force = 30
 	force_wielded = 36
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike)
-	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/strike, /datum/intent/sword/chop)
+	gripped_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust, /datum/intent/sword/peel, /datum/intent/sword/chop)
 	icon_state = "martyrsword"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	item_state = "martyrsword"
