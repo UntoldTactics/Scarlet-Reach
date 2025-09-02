@@ -359,10 +359,6 @@
 		I.damtype = BURN	//Changes weapon damage type to fire
 		I.slot_flags = null	//Can't sheathe a burning sword
 		ADD_TRAIT(parent, TRAIT_NODROP, TRAIT_GENERIC)	//You're committed, now.
-		if(STATE_MARTYR)
-			current_holder.visible_message("[span_notice("[current_holder] raises their sword towards the sky as it is engulfed by Divine fire! The skies begin to part, the Gods themselves pay witness!")]", span_notice("You raise your blade to the skies as they begin to part! THE TEN WITNESS YOUR SACRAFICE!"))
-		if(STATE_MARTYRULT)
-			current_holder.visible_message("[span_notice("[current_holder] raises their sword towards the sky as it is engulfed by Divine fire! The skies begin to part, the Gods themselves pay witness!")]", span_notice("You raise your blade to the skies as they begin to part! THE TEN WITNESS YOUR SACRAFICE!"))
 
 		if(status_flag)	//Important to switch this early.
 			current_state = status_flag
@@ -376,7 +372,6 @@
 				I.max_integrity = 2000				//If you're committing, we repair the weapon and give it a boost so it lasts the whole fight
 				I.obj_integrity = I.max_integrity
 				adjust_stats(current_state)	//Gives them extra stats.
-				lightning_strike_heretics(H) // SMITE THE HERETICS
 			if(STATE_MARTYRULT)
 				end_activation = world.time + ultimate_duration
 				I.max_integrity = 9999				//why not, they got 2 mins anyway
@@ -388,7 +383,6 @@
 				current_holder.STAINT += stat_bonus_martyr
 				current_holder.STAPER += stat_bonus_martyr
 				current_holder.STALUC += stat_bonus_martyr
-				lightning_strike_heretics(H) // SMITE THE HERETICS
 			else
 				end_activation = world.time + safe_duration
 
@@ -401,12 +395,14 @@
 					to_chat(H, span_warning("I can feel my muscles nearly burst from power! I can jump great heights!"))
 					ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
 					ADD_TRAIT(H, TRAIT_NOFALLDAMAGE2, TRAIT_GENERIC)
+					lightning_strike_heretics(H)
 				if(STATE_MARTYRULT)
 					SEND_SOUND(H, sound(null))
 					H.cmode_music = 'sound/music/combat_martyrult.ogg'
 					to_chat(H, span_warning("I can jump great heights!"))
 					ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
 					ADD_TRAIT(H, TRAIT_NOFALLDAMAGE2, TRAIT_GENERIC)
+					lightning_strike_heretics(H)
 			adjust_traits(remove = FALSE)
 			if(!H.cmode)	//Turns on combat mode (it syncs up the audio neatly)
 				H.toggle_cmode()
