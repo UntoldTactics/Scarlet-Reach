@@ -5,12 +5,12 @@
 /datum/component/martyrweapon
 	var/list/allowed_areas = list(/area/rogue/indoors/town/church, /area/rogue/indoors/town/church/chapel, /area/rogue/indoors/town/church/basement)
 	var/list/allowed_patrons = list()
-	var/cooldown = 30 MINUTES
+	var/cooldown = 15 MINUTES
 	var/last_activation = 0
 	var/next_activation = 0
 	var/end_activation = 0
 	var/ignite_chance = 2
-	var/traits_applied = list(TRAIT_NOPAIN, TRAIT_NOPAINSTUN, TRAIT_NOMOOD, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_BLOODLOSS_IMMUNE, TRAIT_LONGSTRIDER, TRAIT_STRONGBITE, TRAIT_STRENGTH_UNCAPPED)
+	var/traits_applied = list(TRAIT_NOPAIN, TRAIT_NOPAINSTUN, TRAIT_NOMOOD, TRAIT_NOHUNGER, TRAIT_NOBREATH, TRAIT_BLOODLOSS_IMMUNE, TRAIT_LONGSTRIDER, TRAIT_STRONGBITE, TRAIT_STRENGTH_UNCAPPED, TRAIT_SHOCKIMMUNE)
 	var/stat_bonus_martyr = 3
 	var/mob/living/current_holder
 	var/is_active = FALSE
@@ -260,10 +260,7 @@
 		var/mob/living/carbon/human/H = current_holder
 		switch(state)
 			if(STATE_SAFE) //Lowered damage due to BURN damage type and SAFE activation
-				var/obj/item/I = parent
-				I.force = 20
-				I.force_wielded = 25
-				return		
+				return
 			if(STATE_MARTYR)
 				current_holder.STASTR += stat_bonus_martyr
 				//current_holder.STASPD += stat_bonus_martyr
@@ -361,8 +358,11 @@
 		var/obj/item/I = parent
 		I.damtype = BURN	//Changes weapon damage type to fire
 		I.slot_flags = null	//Can't sheathe a burning sword
-
 		ADD_TRAIT(parent, TRAIT_NODROP, TRAIT_GENERIC)	//You're committed, now.
+		if(STATE_MARTYR)
+			current_holder.visible_message("[span_notice("[current_holder] raises their sword towards the sky as it is engulfed by Divine fire! The skies begin to part, the Gods themselves pay witness!")]", span_notice("You raise your blade to the skies as they begin to part! THE TEN WITNESS YOUR SACRAFICE!"))
+		if(STATE_MARTYRULT)
+			current_holder.visible_message("[span_notice("[current_holder] raises their sword towards the sky as it is engulfed by Divine fire! The skies begin to part, the Gods themselves pay witness!")]", span_notice("You raise your blade to the skies as they begin to part! THE TEN WITNESS YOUR SACRAFICE!"))
 
 		if(status_flag)	//Important to switch this early.
 			current_state = status_flag
@@ -376,6 +376,7 @@
 				I.max_integrity = 2000				//If you're committing, we repair the weapon and give it a boost so it lasts the whole fight
 				I.obj_integrity = I.max_integrity
 				adjust_stats(current_state)	//Gives them extra stats.
+				lightning_strike_heretics(H) // SMITE THE HERETICS
 			if(STATE_MARTYRULT)
 				end_activation = world.time + ultimate_duration
 				I.max_integrity = 9999				//why not, they got 2 mins anyway
@@ -387,6 +388,7 @@
 				current_holder.STAINT += stat_bonus_martyr
 				current_holder.STAPER += stat_bonus_martyr
 				current_holder.STALUC += stat_bonus_martyr
+				lightning_strike_heretics(H) // SMITE THE HERETICS
 			else
 				end_activation = world.time + safe_duration
 
