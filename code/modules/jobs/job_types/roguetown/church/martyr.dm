@@ -259,7 +259,7 @@
 	if(current_holder)
 		var/mob/living/carbon/human/H = current_holder
 		switch(state)
-			if(STATE_SAFE) //Lowered damage due to BURN damage type and SAFE activation
+			if(STATE_SAFE)
 				return
 			if(STATE_MARTYR)
 				current_holder.STASTR += stat_bonus_martyr
