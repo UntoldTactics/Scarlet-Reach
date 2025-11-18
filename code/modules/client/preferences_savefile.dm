@@ -199,6 +199,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["anonymize"]			>> anonymize
 	S["masked_examine"]		>> masked_examine
 	S["mute_animal_emotes"]	>> mute_animal_emotes
+	S["no_examine_blocks"]	>> no_examine_blocks
 	S["crt"]				>> crt
 	S["grain"]				>> grain
 	S["sexable"]			>> sexable
@@ -271,7 +272,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	pda_style		= sanitize_inlist(pda_style, GLOB.pda_styles, initial(pda_style))
 	pda_color		= sanitize_hexcolor(pda_color, 6, 1, initial(pda_color))
 	key_bindings 	= sanitize_islist(key_bindings, list())
-	
+
 	//ROGUETOWN
 	parallax = PARALLAX_INSANE
 
@@ -310,6 +311,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["anonymize"], anonymize)
 	WRITE_FILE(S["masked_examine"], masked_examine)
 	WRITE_FILE(S["mute_animal_emotes"], mute_animal_emotes)
+	WRITE_FILE(S["no_examine_blocks"], no_examine_blocks)
 	WRITE_FILE(S["crt"], crt)
 	WRITE_FILE(S["sexable"], sexable)
 	WRITE_FILE(S["shake"], shake)
@@ -410,8 +412,10 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 /datum/preferences/proc/_load_virtue(S)
 	var/virtue_type
 	var/virtuetwo_type
+	var/origin_type
 	S["virtue"] >> virtue_type
 	S["virtuetwo"] >> virtuetwo_type
+	S["virtue_origin"] >> origin_type
 	if (virtue_type)
 		virtue = new virtue_type()
 	else
@@ -421,6 +425,11 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		virtuetwo = new virtuetwo_type
 	else
 		virtuetwo = new /datum/virtue/none
+
+	if(origin_type)
+		virtue_origin = new origin_type
+	else
+		virtue_origin = new /datum/virtue/none
 
 /datum/preferences/proc/_load_loadout(S)
 	var/loadout_type
@@ -763,6 +772,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["statpack"] , statpack.type)
 	WRITE_FILE(S["virtue"] , virtue.type)
 	WRITE_FILE(S["virtuetwo"], virtuetwo.type)
+	WRITE_FILE(S["virtue_origin"], virtue_origin.type)
 	WRITE_FILE(S["combat_music"], combat_music.type)
 	WRITE_FILE(S["body_size"] , features["body_size"])
 	if(loadout)

@@ -560,6 +560,24 @@
 	desc = "Something has chilled me to the bone! It's hard to move."
 	icon_state = "muscles"
 
+/datum/status_effect/debuff/sensitivity
+	id = "Sunlight Sensitivity"
+	alert_type =  /atom/movable/screen/alert/status_effect/debuff/sensitivity
+	effectedstats = list("perception" = -1)
+
+/atom/movable/screen/alert/status_effect/debuff/sensitivity
+	name = "Sunlight Sensitivity"
+	desc = "The sunlight is too much for your sensitive eyes!"
+	icon_state = "debuff"
+
+/datum/status_effect/debuff/sensitivity/process()
+
+	.=..()
+	var/area/rogue/our_area = get_area(owner)
+	if(!(our_area.outdoors) || GLOB.tod != "day")
+		owner.remove_status_effect(/datum/status_effect/debuff/sensitivity)
+		owner.remove_stress(/datum/stressevent/sensitivity)
+
 /datum/status_effect/debuff/sunspurn
 	id = "Sunspurn"
 	alert_type =  /atom/movable/screen/alert/status_effect/debuff/sunspurn
@@ -840,23 +858,18 @@
 ///HARPY FLIGHT STUFF END///
 ///////////////////////////
 
-/datum/status_effect/debuff/quest_lock
-	id = "quest_lock"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/quest_lock
-	duration = 20 MINUTES
+/datum/status_effect/debuff/specialcd
+	id = "specialcd"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/specialcd
+	duration = 30 SECONDS
+	status_type = STATUS_EFFECT_UNIQUE
 
-/atom/movable/screen/alert/status_effect/debuff/quest_lock
-	name = "Edict of the Ten"
-	desc = "A sliver of sacred favor clings to you. Followers of the Ten will not enlist your aid in their routine."
+/datum/status_effect/debuff/specialcd/on_creation(mob/living/new_owner, new_dur)
+	if(new_dur)
+		duration = new_dur
+	return ..()
+
+/atom/movable/screen/alert/status_effect/debuff/specialcd
+	name = "Special Manouevre Cooldown"
+	desc = "I used it. I must wait."
 	icon_state = "debuff"
-
-/datum/status_effect/debuff/silver_curse
-	id = "silver_curse"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_curse
-	effectedstats = list("strength" = -2,"perception" = -2,"intelligence" = -2, "constitution" = -2, "endurance" = -2, "speed" = -2)
-	duration = 45 SECONDS
-
-/atom/movable/screen/alert/status_effect/debuff/silver_curse
-	name = "Silver Curse"
-	desc = "My BANE!"
-	icon_state = "hunger3"

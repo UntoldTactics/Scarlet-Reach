@@ -4,6 +4,10 @@
 /datum/species/lamia
 	name = "Lamia"
 	id = "lamia"
+	is_subrace = TRUE
+	origin_default = /datum/virtue/origin/etrusca
+	origin = "Etrusca"
+	base_name = "Beastvolk"
 	desc = "<b>Lamia: Raiders of the Coast</b><br>\
 	Like the wildkin of the lands of Enigma, Lamia are a catch-all umbrella term for various humanized spawn of the deep made by Abyssor’s hand. \
 	Mermaids, naga, and sirens all fall into this category. \
@@ -55,7 +59,7 @@
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes,
 		ORGAN_SLOT_EARS = /obj/item/organ/ears,
-		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue/lamia_forked,
+		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue/wild_tongue/lamia_forked,
 		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
 //		ORGAN_SLOT_TAIL = /obj/item/organ/tail/lamian_tail,
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
