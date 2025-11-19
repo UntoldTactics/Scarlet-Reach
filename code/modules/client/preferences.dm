@@ -517,7 +517,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(agevetted)
 				dat += "<br><b>Headshot:</b> <a href='?_src_=prefs;preference=headshot;task=input'>Change</a>"
 				if(headshot_link != null)
-					dat += "<br><img src='[headshot_link]' width='150px' height='175px'>"
+					dat += "<br><img src='[headshot_link]' width='150px' height='150px'>"
 				dat += "<br><b>NSFW Bodyshot:</b> <a href='?_src_=prefs;preference=nsfw_headshot;task=input'>Change</a>"
 				if(nsfw_headshot_link != null)
 					dat += "<br><img src='[nsfw_headshot_link]' width='125px' height='175px'>"
